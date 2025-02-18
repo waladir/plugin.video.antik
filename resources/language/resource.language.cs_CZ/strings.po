@@ -1,0 +1,360 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: cz\n"
+
+# nastaveni
+
+msgctxt "#30000"
+msgid "Prihlásenie"
+msgstr "Přihlášení"
+
+msgctxt "#30001"
+msgid "Prihlasovacie meno"
+msgstr "Přihlašovací jméno"
+
+msgctxt "#30002"
+msgid "Heslo"
+msgstr "Heslo"
+
+msgctxt "#30010"
+msgid "Nastavenie"
+msgstr "Nastavení"
+
+msgctxt "#30011"
+msgid "Skryť nastavenia v menu"
+msgstr "Skrýt nastavení v menu"
+
+msgctxt "#30020"
+msgid "Adresár pre playlist a EPG"
+msgstr "Adresář pro playlist a EPG"
+
+msgctxt "#30021"
+msgid "Automaticky generovať EPG"
+msgstr "Automaticky generovat EPG"
+
+msgctxt "#30022"
+msgid "Interval pre generovanie EPG (hod.)"
+msgstr "Interval pro generování EPG (hod.)"
+
+msgctxt "#30023"
+msgid "Generovať playlist"
+msgstr "Generovat playlist"
+
+msgctxt "#30024"
+msgid "Generovať EPG"
+msgstr "Generovat EPG"
+
+msgctxt "#30030"
+msgid "Logovanie"
+msgstr "Logování"
+
+msgctxt "#30031"
+msgid "Logovanie požiadaviek"
+msgstr "Logování požadavků"
+
+msgctxt "#30032"
+msgid "Logovanie odpovedí"
+msgstr "Logování odpovědí"
+
+msgctxt "#30040"
+msgid "Zobrazenie infomácií"
+msgstr "Zobrazení informací"
+
+msgctxt "#30041"
+msgid "Nastavenie InputStream Helper"
+msgstr "Nastavení InputStream Helper"
+
+msgctxt "#30042"
+msgid "(Re)inštalovať Widevine CDM"
+msgstr "(Re)instalovat Widevine CDM"
+
+msgctxt "#30043"
+msgid "Odstraniť Widevine CDM..."
+msgstr "Odstranit Widevine CDM..."
+
+# menu
+
+msgctxt "#300100"
+msgid "Nastavenie"
+msgstr "Nastavení"
+
+msgctxt "#300101"
+msgid "Správa zariadení"
+msgstr "Správa zařízení"
+
+msgctxt "#300102"
+msgid "Nastavenie doplnku"
+msgstr "Nastavení doplňku"
+
+msgctxt "#300103"
+msgid "Ručná editácia"
+msgstr "Ruční editace"
+
+msgctxt "#300104"
+msgid "Vlastné skupiny kanálov"
+msgstr "Vlastní skupiny kanálů"
+
+msgctxt "#300105"
+msgid "Resetovat zoznam kanálov"
+msgstr "Resetovat seznam kanálů"
+
+msgctxt "#300106"
+msgid "Obnova zoznamu kanálov"
+msgstr "Obnova seznamu kanálů"
+
+msgctxt "#300107"
+msgid "Všetky kanály"
+msgstr "Všechny kanály"
+
+msgctxt "#300108"
+msgid "Skupiny kanálov"
+msgstr "Skupiny kanálů"
+
+msgctxt "#300109"
+msgid "Pridať kanál"
+msgstr "Přidat kanály"
+
+msgctxt "#300110"
+msgid "Pridať všetky kanály"
+msgstr "Přidat všechny kanály"
+
+msgctxt "#300111"
+msgid "Živé vysielanie"
+msgstr "Živé vysílání"
+
+msgctxt "#300112"
+msgid "Archív"
+msgstr "Archiv"
+
+# hlasky
+
+msgctxt "#300200"
+msgid "V nastavení je nutné mať vyplnené všetky prihlasovacie údaje a meno zariadenia"
+msgstr "V nastavení je nutné mít vyplněné všechny přihlašovací údaje a jméno zařízení"
+
+msgctxt "#300201"
+msgid "Chyba pri uložení "
+msgstr "Chyba při uložení "
+
+msgctxt "#300202"
+msgid "Chyba pri načítaní "
+msgstr "Chyba při načtení "
+
+msgctxt "#300203"
+msgid "Chyba pri resetu "
+msgstr "Chyba při resetu "
+
+msgctxt "#300204"
+msgid "Chyba pri volaní "
+msgstr "Chyba při volaní "
+
+msgctxt "#300205"
+msgid "Bola vytvorená nová session"
+msgstr "Byla vytvořená nová session"
+
+msgctxt "#300206"
+msgid "Problém pri prihlásení"
+msgstr "Problém při přihlášení"
+
+msgctxt "#300207"
+msgid "Chyba pri získaní zariadeni"
+msgstr "Chyba při získání zařízení"
+
+msgctxt "#300208"
+msgid "posledná aktivita"
+msgstr "poslední aktivita"
+
+msgctxt "#300209"
+msgid "Bol prekročený limit zariadenia. Niektoré je potrebné odstrániť."
+msgstr "Byl překročen limit zařízení. Některé je potřeba odstranit."
+
+msgctxt "#300210"
+msgid "Nezaregistrované zariadenie. Skúste v nastavení vytvoriť novú session."
+msgstr "Nezaregistrované zařízení. Zkuste v nastavení vytvořit novou session."
+
+msgctxt "#300211"
+msgid "Problém pri načítaní kanálov"
+msgstr "Problém při načtení kanálů"
+
+msgctxt "#300212"
+msgid " je použité pri kanáli "
+msgstr " je použité u kanálu "
+
+msgctxt "#300213"
+msgid "Je potrebné zadať číslo väčšie ako jedna"
+msgstr "Je potřeba zadat číslo větší než jedna"
+
+msgctxt "#300214"
+msgid "Neexistuje žiadná záloha"
+msgstr "Neexistuje žádná záloha"
+
+msgctxt "#300215"
+msgid "Chyba uloženia skupiny"
+msgstr "Chyba uložení skupiny"
+
+msgctxt "#300216"
+msgid "Je nutné zadať názov skupiny"
+msgstr "Je nutné zadat název skupiny"
+
+msgctxt "#300217"
+msgid "Názov skupiny je už použitý"
+msgstr "Název skupiny je už použitý"
+
+msgctxt "#300218"
+msgid "Problém pri prehraní streamu"
+msgstr "Problém při přehrání streamu"
+
+msgctxt "#300312"
+msgid "Nastav adresár pre playlist a EPG!"
+msgstr "Nastav adresář pro playlist a EPG!"
+
+msgctxt "#300313"
+msgid "Chyba pri uložení playlistu"
+msgstr "Chyba při uložení playlistu"
+
+msgctxt "#300314"
+msgid "Playlist bol uložený"
+msgstr "Playlist byl uložený"
+
+msgctxt "#300315"
+msgid "Chyba pri uložení EPG"
+msgstr "Chyba při uložení EPG"
+
+msgctxt "#300316"
+msgid "EPG bolo uložené"
+msgstr "EPG bylo uložené"
+
+msgctxt "#300317"
+msgid "Nevrátené žiadne EPG dáta!"
+msgstr "Nevrácena žádná EPG data!"
+
+msgctxt "#300318"
+msgid "Zoznam kanálov bol resetovaný"
+msgstr "Seznam kanálů byl resetovaný"
+
+msgctxt "#300319"
+msgid "Chyba pri načítaní zálohy"
+msgstr "Chyba při načtení zálohy"
+
+msgctxt "#300320"
+msgid "Zoznam kanálov bol obnovený"
+msgstr "Seznam kanálů byl obnovený"
+
+msgctxt "#300321"
+msgid "Chyba uloženia kanálov"
+msgstr "Chyba při uložení kanálů"
+
+msgctxt "#300322"
+msgid "Záloha nenájdená"
+msgstr "Záloha nenalezena"
+
+
+
+# dialogy
+
+msgctxt "#300300"
+msgid "Odstránenie zariadenia"
+msgstr "Odstranění zařízení"
+
+msgctxt "#300301"
+msgid "Naozaj odstrániť zariadenie"
+msgstr "Opravdu odstranit zařízení"
+
+msgctxt "#300302"
+msgid "Zvýšiť čísla kanálov"
+msgstr "Zvýšit čísla kanálů"
+
+msgctxt "#300303"
+msgid "Znížiť čísla kanálov"
+msgstr "Snížit čísla kanálů"
+
+msgctxt "#300304"
+msgid "Odstrániť kanál"
+msgstr "Odstranit kanál"
+
+msgctxt "#300305"
+msgid "Zvýšiť čísla kanálov od kanála číslo"
+msgstr "Zvýšit čísla kanálů počinaje kanálem číslo"
+
+msgctxt "#300306"
+msgid "Znížiť čísla kanálov od kanála číslo"
+msgstr "Snížit čísla kanálů počinaje kanálem číslo"
+
+msgctxt "#300307"
+msgid "Vybrať skupinu"
+msgstr "Vybrat skupinu"
+
+msgctxt "#300308"
+msgid "Zmazať skupinu"
+msgstr "Smazat skupinu"
+
+msgctxt "#300309"
+msgid "Názov skupiny"
+msgstr "Název skupiny"
+
+msgctxt "#300310"
+msgid "Zmazanie skupiny kanálov"
+msgstr "Smazání skupiny kanálů"
+
+msgctxt "#300311"
+msgid "Naozaj zmazať skupinu kanálov"
+msgstr "Opravdu smazat skupinu kanálů"
+
+# data
+
+msgctxt "#300400"
+msgid "Pondělok"
+msgstr "Pondělí"
+
+msgctxt "#300401"
+msgid "Útorok"
+msgstr "Úterý"
+
+msgctxt "#300402"
+msgid "Streda"
+msgstr "Středa"
+
+msgctxt "#300403"
+msgid "Štvrtok"
+msgstr "Čtvrtek"
+
+msgctxt "#300404"
+msgid "Piatok"
+msgstr "Pátok"
+
+msgctxt "#300405"
+msgid "Sobota"
+msgstr "Sobota"
+
+msgctxt "#300406"
+msgid "Neděľa"
+msgstr "Neděle"
+
+msgctxt "#300407"
+msgid "Po"
+msgstr "Po"
+
+msgctxt "#300408"
+msgid "Út"
+msgstr "Út"
+
+msgctxt "#300409"
+msgid "St"
+msgstr "St"
+
+msgctxt "#300410"
+msgid "Št"
+msgstr "Čt"
+
+msgctxt "#300411"
+msgid "Pi"
+msgstr "Pá"
+
+msgctxt "#300412"
+msgid "So"
+msgstr "So"
+
+msgctxt "#300413"
+msgid "Ne"
+msgstr "Ne"

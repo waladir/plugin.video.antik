@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<category label="30000">
+                <setting label="30001" type="text" id="username" default=""/>
+                <setting label="30002" type="text" id="password" option="hidden" enable="!eq(-1,false)" default=""/>
+                <setting label="Device Id" type="text" id="deviceid" enable="false" default=""/>                
+                <setting label="Antik TV" type="select" id="antik" values="SK|CZ" default="SK"/>
+                <setting label="Nová session" type="action" action="RunPlugin(plugin://plugin.video.antik?action=reset_session)"/>
+	</category>
+	<category label="30010">
+                <setting label="30011" type="bool" id="hide_settings" default="false"/>
+	</category>    
+	<category label="Widevine">
+        <setting label="Zobrazení informací" type="action" action="RunScript(script.module.inputstreamhelper,info)"/>
+        <setting label="Nastavení InputStream Helper" type="action" action="Addon.OpenSettings(script.module.inputstreamhelper)" option="close"/>                              
+        <setting label="(Re)instalovat Widevine CDM" type="action" action="RunScript(script.module.inputstreamhelper,widevine_install)" visible="!system.platform.android"/>  
+        <setting label="Odstranit Widevine CDM..." type="action" action="RunScript(script.module.inputstreamhelper, widevine_remove)" visible="!system.platform.android"/>        
+	</category>      
+	<category label="IPTV Simple Client">
+                <setting label="30020" type="folder" id="output_dir" default=""/>
+                <setting label="30021" type="bool" id="autogen" default="false"/>
+                <setting label="30022" type="slider" id="epg_interval" range="1,1,24" default="12" option="int"/>
+                <setting label="Catchup mod" type="select" id="catchup_mode" values="append|default" default="append"/>
+                <setting label="30023" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_playlist)"/>
+                <setting label="30024" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_epg)"/>
+	</category>      
+    <category label="30030">
+                <setting label="30031" type="bool" id="log_request_url" default="false"/>
+                <setting label="30032" type="bool" id="log_response" default="false"/>
+	</category>    
+</settings>

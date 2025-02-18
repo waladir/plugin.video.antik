@@ -1,0 +1,41 @@
+﻿<addon id="plugin.video.antik" name="Antik TV" provider-name="waladir" version="1.0.0">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="script.module.requests" version="2.18.4"/>
+    <import addon="inputstream.adaptive" version="19.0.0"/>
+    <import addon="script.module.inputstreamhelper" version="0.4.2"/>        
+  </requires>
+  <extension library="main.py" point="xbmc.python.pluginsource">
+    <provides>video</provides>
+  </extension>
+  <extension library="service.py" point="xbmc.service"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Antik TV</summary>
+    <summary lang="sk_SK">Antik TV</summary>
+    <summary lang="cs_CZ">Antik TV</summary>
+    <description lang="en_GB">
+Doplněk pro Antik TV (CZ i SK)
+
+Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/antik-tv)    
+    </description>
+    <description lang="sk_SK">
+Doplněk pro Antik TV (CZ i SK)
+
+Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/antik-tv)    
+    </description>
+    <description lang="cs_CZ">
+Doplněk pro Antik TV (CZ i SK)
+
+Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/antik-tv)    
+    </description>
+    <platform>all</platform>
+    <source>https://github.com/waladir/plugin.video.antik</source>
+    <news>
+v1.0.0 (20.2.2025)
+- první verze
+    </news>
+    <assets>
+        <icon>icon.jpg</icon>
+    </assets>
+  </extension>
+</addon>
