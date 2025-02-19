@@ -32,10 +32,15 @@ def play_live(id):
         url = response['data']['streams'][0]['url']
         list_item = xbmcgui.ListItem(path = url)
         list_item.setProperty('inputstream', 'inputstream.adaptive')
-        list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
-        list_item.setProperty('inputstream.adaptive.license_type', 'com.widevine.alpha')
-        list_item.setProperty('inputstream.adaptive.license_key', 'https://drm.antik.sk/widevine/key||R{SSM}|')                
-        list_item.setMimeType('application/dash+xml')
+        if response['data']['streams'][0]['playlist'] == 'mpd':
+            list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
+            list_item.setMimeType('application/dash+xml')
+        else:
+            list_item.setProperty('inputstream', 'inputstream.adaptive')
+            list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
+        if 'drm' in response['data']['streams'][0]:
+            list_item.setProperty('inputstream.adaptive.license_type', 'com.widevine.alpha')
+            list_item.setProperty('inputstream.adaptive.license_key', 'https://drm.antik.sk/widevine/key||R{SSM}|')                
         list_item.setContentLookup(False)       
         xbmcplugin.setResolvedUrl(_handle, True, list_item)
     else:
@@ -47,8 +52,6 @@ def play_archive(id, start, stop):
     api = API()
     post = {'channelIdentifier' : id, 'showStart' : start, 'showStop' : stop}
     response = api.call_api(api = 'archive/verify', data = post, method = 'post', cookies = session.get_cookies())
-    print(post)
-    print(response)
     if 'showIdentifier' in response and len(response['showIdentifier']) > 0:
         url = get_api_url() + 'archive/playShow/' + response['showIdentifier']
         list_item = xbmcgui.ListItem(path = url)
