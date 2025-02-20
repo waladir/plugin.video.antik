@@ -1,2 +1,5 @@
-v1.0.0 (20.2.2025)
+v1.0.1 (20.2.2025)
+- úprava detekce typu streamu
+
+v1.0.0 (19.2.2025)
 - první verze

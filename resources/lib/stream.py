@@ -32,12 +32,12 @@ def play_live(id):
         url = response['data']['streams'][0]['url']
         list_item = xbmcgui.ListItem(path = url)
         list_item.setProperty('inputstream', 'inputstream.adaptive')
-        if response['data']['streams'][0]['playlist'] == 'mpd':
-            list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
-            list_item.setMimeType('application/dash+xml')
-        else:
+        if response['data']['streams'][0]['playlist'] == 'm3u8':
             list_item.setProperty('inputstream', 'inputstream.adaptive')
             list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
+        else:
+            list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
+            list_item.setMimeType('application/dash+xml')
         if 'drm' in response['data']['streams'][0]:
             list_item.setProperty('inputstream.adaptive.license_type', 'com.widevine.alpha')
             list_item.setProperty('inputstream.adaptive.license_key', 'https://drm.antik.sk/widevine/key||R{SSM}|')                
