@@ -2,6 +2,7 @@
 from resources.lib.session import Session
 from resources.lib.channels import Channels
 from resources.lib.api import API
+from resources.lib.utils import get_kodi_version
 
 from datetime import datetime
 import time
@@ -19,7 +20,7 @@ def get_live_epg():
                     startts = int(datetime.fromisoformat(item['Start']).timestamp())
                     endts = int(datetime.fromisoformat(item['Stop']).timestamp())
                     if time.time() >= startts and time.time() <= endts:
-                        epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : channel['id'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop']})
+                        epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : channel['id'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
         return epg_api(data = epg, key = 'channel_id')
     else:
         return {}
@@ -34,7 +35,7 @@ def get_channel_epg(id, from_ts, to_ts):
         for item in response[0]['epg']:
             startts = int(datetime.fromisoformat(item['Start']).timestamp())
             endts = int(datetime.fromisoformat(item['Stop']).timestamp())
-            epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop']})
+            epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
         return epg_api(data = epg, key = 'startts')
     else:
         return {}
@@ -53,7 +54,7 @@ def get_channels_epg(channels):
                 for item in channel['epg']:
                     startts = int(datetime.fromisoformat(item['Start']).timestamp())
                     endts = int(datetime.fromisoformat(item['Stop']).timestamp())
-                    epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop']})
+                    epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
     return epg
 
 
@@ -70,7 +71,8 @@ def epg_api(data, key):
         endts = item['endts']
         start = item['start']
         stop = item['stop']
-        epg_item = {'id' : id, 'title' : title, 'channel_id' : channel_id, 'description' : description, 'startts' : startts, 'endts' : endts, 'start' : start, 'stop' : stop}
+        genres = item['genres']
+        epg_item = {'id' : id, 'title' : title, 'channel_id' : channel_id, 'description' : description, 'startts' : startts, 'endts' : endts, 'start' : start, 'stop' : stop, 'genres' : genres}
         if key == 'startts':
             epg.update({startts : epg_item})
         elif key == 'channel_id':
@@ -83,8 +85,24 @@ def epg_api(data, key):
     return epg
 
 def epg_listitem(list_item, epg, logo):
-    list_item.setInfo('video', {'mediatype' : 'movie'})
+    kodi_version = get_kodi_version()
+    genres = []
+    if kodi_version >= 20:
+        infotag = list_item.getVideoInfoTag()
+        infotag.setMediaType('movie')
+    else:
+        list_item.setInfo('video', {'mediatype' : 'movie'})    
     if 'description' in epg and len(epg['description']) > 0:
-        list_item.setInfo('video', {'plot': epg['description']})
+        if kodi_version >= 20:
+            infotag.setPlot(epg['description'])
+        else:
+            list_item.setInfo('video', {'plot': epg['description']})
+    if 'genres' in epg and len(epg['genres']) > 0:
+        for genre in epg['genres']:      
+          genres.append(genre)
+        if kodi_version >= 20:
+            infotag.setGenres(genres)
+        else:
+            list_item.setInfo('video', {'genre' : genres})          
     return list_item
 

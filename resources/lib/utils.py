@@ -29,6 +29,9 @@ def check_settings():
 def get_url(**kwargs):
     return '{0}?{1}'.format(_url, urlencode(kwargs))
 
+def get_kodi_version():
+    return int(xbmc.getInfoLabel('System.BuildVersion').split('.')[0])
+
 # kod od listenera
 def getNumbers(txt):
     newstr = ''.join((ch if ch in '0123456789' else ' ') for ch in txt)
@@ -75,3 +78,6 @@ def get_session_cookie():
         return 'webtv_cz_session'
     else:
         return 'webtvapi_session'        
+    
+def replace_by_html_entity(string):
+    return string.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace("'","&apos;").replace('"',"&quot;")    

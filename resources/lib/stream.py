@@ -17,7 +17,6 @@ def play_catchup(id, start_ts, end_ts):
     end_ts = int(end_ts)
     epg = get_channel_epg(id = id, from_ts = start_ts, to_ts = end_ts)
     if start_ts in epg:
-        print(epg[start_ts])
         play_archive(id = epg[start_ts]['channel_id'], start = epg[start_ts]['start'], stop = epg[start_ts]['stop'])
     else:
         play_live(id = id)

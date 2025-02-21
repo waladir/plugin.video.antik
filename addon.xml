@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.antik" name="Antik TV" provider-name="waladir" version="1.0.1">
+﻿<addon id="plugin.video.antik" name="Antik TV" provider-name="waladir" version="1.0.2">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.requests" version="2.18.4"/>
@@ -16,21 +16,26 @@
     <description lang="en_GB">
 Doplněk pro Antik TV (CZ i SK)
 
-Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/antik-tv)    
+Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/prispevek-antik-tv--13396)    
     </description>
     <description lang="sk_SK">
 Doplněk pro Antik TV (CZ i SK)
 
-Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/antik-tv)    
+Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/prispevek-antik-tv--13396)    
     </description>
     <description lang="cs_CZ">
 Doplněk pro Antik TV (CZ i SK)
 
-Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/antik-tv)    
+Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-kodi.cz/prispevek-antik-tv--13396)    
     </description>
     <platform>all</platform>
     <source>https://github.com/waladir/plugin.video.antik</source>
     <news>
+v1.0.2 (21.2.2025)
+- přidání žánrů
+- filtrování kanálů pro archiv/catchup
+- úprava linku na fórum
+
 v1.0.1 (20.2.2025)
 - úprava detekce typu streamu
 

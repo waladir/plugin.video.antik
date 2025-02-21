@@ -271,7 +271,7 @@ class Channels:
                 image = response['data'][channel]['logo']
             else:
                 image = None
-            channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'visible' : True}})
+            channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'],  'visible' : True}})
         return channels
 
     def load_channels(self):
@@ -386,6 +386,10 @@ class Channels:
                     self.channels[channel].update({'antik_number' : antik_channels[channel]['antik_number']})
                 if self.channels[channel]['logo'] != antik_channels[channel]['logo']:
                     self.channels[channel].update({'logo' : antik_channels[channel]['logo']})
+                if 'archive' not in self.channels[channel] or self.channels[channel]['archive'] != antik_channels[channel]['archive']:
+                    self.channels[channel].update({'archive' : antik_channels[channel]['archive']})                    
+                if 'adult' not in self.channels[channel] or self.channels[channel]['adult'] != antik_channels[channel]['adult']:
+                    self.channels[channel].update({'adult' : antik_channels[channel]['adult']})                    
             else:
                 max_number = max_number + 1
                 antik_channels[channel]['channel_number'] = max_number

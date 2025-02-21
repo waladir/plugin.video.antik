@@ -9,7 +9,7 @@ from datetime import datetime
 import time
 
 from resources.lib.channels import Channels
-from resources.lib.utils import plugin_id
+from resources.lib.utils import plugin_id, replace_by_html_entity
 from resources.lib.epg import get_channels_epg
 
 tz_offset = int((time.mktime(datetime.now().timetuple())-time.mktime(datetime.utcnow().timetuple()))/3600)
@@ -64,10 +64,13 @@ def generate_playlist(output_file = ''):
                 logo = channels_list[number]['logo']
                 if logo is None:
                     logo = ''
-                if addon.getSetting('catchup_mode') == 'default':
-                    line = '#EXTINF:-1 catchup="default" catchup-days="7" catchup-source="plugin://' + plugin_id + '/?action=iptsc_play_stream&id=' + str(channels_list[number]['id']) + '&catchup_start_ts={utc}&catchup_end_ts={utcend}" tvg-chno="' + str(number) + '" tvg-id="' + channels_list[number]['name'] + '" tvh-epg="0" tvg-logo="' + logo + '",' + channels_list[number]['name']
+                if 'archive' not in channels_list[number] or channels_list[number]['archive'] == True:                    
+                    if addon.getSetting('catchup_mode') == 'default':
+                        line = '#EXTINF:-1 catchup="default" catchup-days="7" catchup-source="plugin://' + plugin_id + '/?action=iptsc_play_stream&id=' + str(channels_list[number]['id']) + '&catchup_start_ts={utc}&catchup_end_ts={utcend}" tvg-chno="' + str(number) + '" tvg-id="' + channels_list[number]['name'] + '" tvh-epg="0" tvg-logo="' + logo + '",' + channels_list[number]['name']
+                    else:
+                        line = '#EXTINF:-1 catchup="append" catchup-days="7" catchup-source="&catchup_start_ts={utc}&catchup_end_ts={utcend}" tvg-chno="' + str(number) + '" tvg-id="' + channels_list[number]['name'] + '" tvh-epg="0" tvg-logo="' + logo + '",' + channels_list[number]['name']
                 else:
-                    line = '#EXTINF:-1 catchup="append" catchup-days="7" catchup-source="&catchup_start_ts={utc}&catchup_end_ts={utcend}" tvg-chno="' + str(number) + '" tvg-id="' + channels_list[number]['name'] + '" tvh-epg="0" tvg-logo="' + logo + '",' + channels_list[number]['name']
+                    line = '#EXTINF:-1 tvg-chno="' + str(number) + '" tvg-id="' + channels_list[number]['name'] + '" tvh-epg="0" tvg-logo="' + logo + '",' + channels_list[number]['name']                    
                 file.write(bytearray((line + '\n').encode('utf-8')))
                 line = 'plugin://' + plugin_id + '/?action=iptsc_play_stream&id=' + str(channels_list[number]['id'])
                 if addon.getSetting('isa') == 'true':
@@ -127,6 +130,9 @@ def generate_epg(output_file = ''):
                         content = content + '       <title lang="cs">' + str(epg_item['title']).replace('&','&amp;').replace('<','&lt;').replace('>','&gt;') + '</title>\n'
                         if epg_item['description'] != None and len(epg_item['description']) > 0:
                             content = content + '       <desc lang="cs">' + epg_item['description'].replace('&','&amp;').replace('<','&lt;').replace('<','&gt;') + '</desc>\n'
+                        if epg_item['genres'] and epg_item['genres'] is not None:
+                            for category in epg_item['genres']:
+                                content = content + '       <category>' +  replace_by_html_entity(category) + '</category>\n'
                         content = content + '    </programme>\n'
                         cnt = cnt + 1
                         if cnt > 20:

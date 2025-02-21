@@ -19,9 +19,10 @@ def list_archive(label):
     channels = Channels()
     channels_list = channels.get_channels_list('channel_number')
     for number in sorted(channels_list.keys()):  
-        list_item = xbmcgui.ListItem(label=channels_list[number]['name'])
-        url = get_url(action='list_archive_days', id = channels_list[number]['id'], label = label + ' / ' + channels_list[number]['name'])  
-        xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+        if 'archive' not in channels_list[number] or channels_list[number]['archive'] == True:
+            list_item = xbmcgui.ListItem(label=channels_list[number]['name'])
+            url = get_url(action='list_archive_days', id = channels_list[number]['id'], label = label + ' / ' + channels_list[number]['name'])  
+            xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
     xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)
 
 def list_archive_days(id, label):
