@@ -97,7 +97,7 @@ def epg_listitem(list_item, epg, logo):
             infotag.setPlot(epg['description'])
         else:
             list_item.setInfo('video', {'plot': epg['description']})
-    if 'genres' in epg and len(epg['genres']) > 0:
+    if 'genres' in epg and epg['genres'] is not None and len(epg['genres']) > 0:
         for genre in epg['genres']:      
           genres.append(genre)
         if kodi_version >= 20:
