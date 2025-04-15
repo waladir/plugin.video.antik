@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys
+import xbmc
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
+
+import time
+import requests
 
 from resources.lib.session import Session
 from resources.lib.api import API
@@ -56,6 +60,8 @@ def play_archive(id, start, stop):
         list_item = xbmcgui.ListItem(path = url)
         list_item.setProperty('inputstream', 'inputstream.adaptive')
         list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
+        list_item.setProperty('ResumeTime', '312' )
+        list_item.setProperty('TotalTime', '20000' )
         list_item.setContentLookup(False)       
         xbmcplugin.setResolvedUrl(_handle, True, list_item)
     else:
