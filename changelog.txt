@@ -1,3 +1,6 @@
+v1.0.5 (22.4.2025)
+- oprava přehrávání archivu
+
 v1.0.4 (15.4.2025)
 - oprava přehrávání archivu (posun začátku)
 
@@ -11,6 +14,3 @@ v1.0.2 (21.2.2025)
 
 v1.0.1 (20.2.2025)
 - úprava detekce typu streamu
-
-v1.0.0 (19.2.2025)
-- první verze
