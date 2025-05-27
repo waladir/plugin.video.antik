@@ -114,8 +114,8 @@ def generate_epg(output_file = ''):
                         logo = ''
                     channels_ids.append(channels_list[number]['id'])
                     channel = channels_list[number]['name']
-                    content = content + '    <channel id="' + channel.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;') + '">\n'
-                    content = content + '            <display-name lang="cs">' + channel.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;') + '</display-name>\n'
+                    content = content + '    <channel id="' + replace_by_html_entity(channel) + '">\n'
+                    content = content + '            <display-name lang="cs">' + replace_by_html_entity(channel) + '</display-name>\n'
                     content = content + '            <icon src="' + logo + '" />\n'
                     content = content + '    </channel>\n'
                 file.write(bytearray((content).encode('utf-8')))
@@ -126,10 +126,10 @@ def generate_epg(output_file = ''):
                     for epg_item in epg:
                         starttime = datetime.fromtimestamp(epg_item['startts']).strftime('%Y%m%d%H%M%S')
                         endtime = datetime.fromtimestamp(epg_item['endts']).strftime('%Y%m%d%H%M%S')
-                        content = content + '    <programme start="' + starttime + ' +0' + str(tz_offset) + '00" stop="' + endtime + ' +0' + str(tz_offset) + '00" channel="' + channels_list_by_id[epg_item['channel_id']]['name'] + '">\n'
-                        content = content + '       <title lang="cs">' + str(epg_item['title']).replace('&','&amp;').replace('<','&lt;').replace('>','&gt;') + '</title>\n'
+                        content = content + '    <programme start="' + starttime + ' +0' + str(tz_offset) + '00" stop="' + endtime + ' +0' + str(tz_offset) + '00" channel="' + replace_by_html_entity(channels_list_by_id[epg_item['channel_id']]['name']) + '">\n'
+                        content = content + '       <title lang="cs">' + replace_by_html_entity(str(epg_item['title'])) + '</title>\n'
                         if epg_item['description'] != None and len(epg_item['description']) > 0:
-                            content = content + '       <desc lang="cs">' + epg_item['description'].replace('&','&amp;').replace('<','&lt;').replace('<','&gt;') + '</desc>\n'
+                            content = content + '       <desc lang="cs">' + replace_by_html_entity(epg_item['description']) + '</desc>\n'
                         if epg_item['genres'] and epg_item['genres'] is not None:
                             for category in epg_item['genres']:
                                 content = content + '       <category>' +  replace_by_html_entity(category) + '</category>\n'
