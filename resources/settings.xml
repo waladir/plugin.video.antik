@@ -9,12 +9,16 @@
 	</category>
 	<category label="30010">
                 <setting label="30011" type="bool" id="hide_settings" default="false"/>
+                <setting label="Picons Server" type="lsep"/>
+                <setting label="Pro loga kanálů použít Picons Server" type="bool" id="use_picons_server" default="false"/>
+                <setting label="IP adresa" type="text" id="picons_server_ip" default="127.0.0.1"/>
+                <setting label="Port" type="number" id="picons_server_port" default="8083"/>
 	</category>    
 	<category label="Widevine">
-        <setting label="Zobrazení informací" type="action" action="RunScript(script.module.inputstreamhelper,info)"/>
-        <setting label="Nastavení InputStream Helper" type="action" action="Addon.OpenSettings(script.module.inputstreamhelper)" option="close"/>                              
-        <setting label="(Re)instalovat Widevine CDM" type="action" action="RunScript(script.module.inputstreamhelper,widevine_install)" visible="!system.platform.android"/>  
-        <setting label="Odstranit Widevine CDM..." type="action" action="RunScript(script.module.inputstreamhelper, widevine_remove)" visible="!system.platform.android"/>        
+                <setting label="Zobrazení informací" type="action" action="RunScript(script.module.inputstreamhelper,info)"/>
+                <setting label="Nastavení InputStream Helper" type="action" action="Addon.OpenSettings(script.module.inputstreamhelper)" option="close"/>                              
+                <setting label="(Re)instalovat Widevine CDM" type="action" action="RunScript(script.module.inputstreamhelper,widevine_install)" visible="!system.platform.android"/>  
+                <setting label="Odstranit Widevine CDM..." type="action" action="RunScript(script.module.inputstreamhelper, widevine_remove)" visible="!system.platform.android"/>        
 	</category>      
 	<category label="IPTV Simple Client">
                 <setting label="30020" type="folder" id="output_dir" default=""/>
@@ -24,7 +28,7 @@
                 <setting label="30023" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_playlist)"/>
                 <setting label="30024" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_epg)"/>
 	</category>      
-    <category label="30030">
+        <category label="30030">
                 <setting label="30031" type="bool" id="log_request_url" default="false"/>
                 <setting label="30032" type="bool" id="log_response" default="false"/>
 	</category>    

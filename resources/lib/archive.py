@@ -6,6 +6,7 @@ import xbmcaddon
     
 from datetime import date, datetime, timedelta
 import time
+from urllib.parse import quote
 
 from resources.lib.utils import get_url, day_translation, day_translation_short
 from resources.lib.channels import Channels 
@@ -15,13 +16,17 @@ if len(sys.argv) > 1:
     _handle = int(sys.argv[1])
 
 def list_archive(label):
+    addon = xbmcaddon.Addon()    
     xbmcplugin.setPluginCategory(_handle, label)
     channels = Channels()
     channels_list = channels.get_channels_list('channel_number')
     for number in sorted(channels_list.keys()):  
         if 'archive' not in channels_list[number] or channels_list[number]['archive'] == True:
             list_item = xbmcgui.ListItem(label=channels_list[number]['name'])
+            if addon.getSetting('use_picons_server') == 'true':
+                list_item.setArt({'icon' : 'http://' + addon.getSetting('picons_server_ip') + ':' + addon.getSetting('picons_server_port') + '/picons/' + quote(channels_list[number]['name'])}) 
             url = get_url(action='list_archive_days', id = channels_list[number]['id'], label = label + ' / ' + channels_list[number]['name'])  
+            
             xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
     xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)
 

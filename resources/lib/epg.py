@@ -91,7 +91,9 @@ def epg_listitem(list_item, epg, logo):
         infotag = list_item.getVideoInfoTag()
         infotag.setMediaType('movie')
     else:
-        list_item.setInfo('video', {'mediatype' : 'movie'})    
+        list_item.setInfo('video', {'mediatype' : 'movie'})   
+    if logo is not None:
+        list_item.setArt({'icon' : logo}) 
     if 'description' in epg and len(epg['description']) > 0:
         if kodi_version >= 20:
             infotag.setPlot(epg['description'])

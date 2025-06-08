@@ -1,3 +1,6 @@
+v1.0.7 (8.6.2025)
+- přidání podpory Picons Serveru
+
 v1.0.6 (27.5.2025)
 - ošetření problémových znaků v EPG
 
@@ -9,8 +12,3 @@ v1.0.4 (15.4.2025)
 
 v1.0.3 (21.2.2025)
 - ošetření chybějících žánrů v datech
-
-v1.0.2 (21.2.2025)
-- přidání žánrů
-- filtrování kanálů pro archiv/catchup
-- úprava linku na fórum

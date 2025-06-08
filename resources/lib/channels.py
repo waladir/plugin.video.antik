@@ -50,6 +50,8 @@ def list_channels_edit(label):
                 list_item = xbmcgui.ListItem(label=str(number) + ' ' + channels_list[number]['name'])
             else:
                 list_item = xbmcgui.ListItem(label='[COLOR=gray]' + str(number) + ' ' + channels_list[number]['name'] + '[/COLOR]')
+            if addon.getSetting('use_picons_server') == 'true':
+                list_item.setArt({'icon' : 'http://' + addon.getSetting('picons_server_ip') + ':' + addon.getSetting('picons_server_port') + '/picons/' + quote(channels_list[number]['name'])}) 
             url = get_url(action='edit_channel', id = channels_list[number]['id'])
             list_item.addContextMenuItems([(addon.getLocalizedString(300302), 'RunPlugin(plugin://' + plugin_id + '?action=change_channels_numbers&from_number=' + str(number) + '&direction=increase)'),       
                                             (addon.getLocalizedString(300303), 'RunPlugin(plugin://' + plugin_id + '?action=change_channels_numbers&from_number=' + str(number) + '&direction=decrease)'),
@@ -168,6 +170,8 @@ def edit_channel_group(group, label):
         for channel in channels_groups.channels[group]:
             if channel in channels_list:
                 list_item = xbmcgui.ListItem(label = channels_list[channel]['name'])
+                if addon.getSetting('use_picons_server') == 'true':
+                    list_item.setArt({'icon' : 'http://' + addon.getSetting('picons_server_ip') + ':' + addon.getSetting('picons_server_port') + '/picons/' + quote(channels_list[channel]['name'])}) 
                 url = get_url(action='edit_channel_group', group = group, label = label)  
                 list_item.addContextMenuItems([(addon.getLocalizedString(300304), 'RunPlugin(plugin://' + plugin_id + '?action=edit_channel_group_delete_channel&group=' + quote(group) + '&channel='  + quote(channel) + ')',)])       
                 xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
@@ -189,6 +193,7 @@ def select_channel_group(group):
         xbmcgui.Dialog().notification('Antik TV', 'Vybraná skupina je prázdná', xbmcgui.NOTIFICATION_WARNING, 5000)    
 
 def edit_channel_group_list_channels(group, label):
+    addon = xbmcaddon.Addon()
     xbmcplugin.setPluginCategory(_handle, label)  
     channels_groups = Channels_groups()
     channels = Channels()
@@ -196,6 +201,8 @@ def edit_channel_group_list_channels(group, label):
     for number in sorted(channels_list.keys()):
         if not group in channels_groups.groups or not group in channels_groups.channels or not channels_list[number]['name'] in channels_groups.channels[group]:
             list_item = xbmcgui.ListItem(label=str(number) + ' ' + channels_list[number]['name'])
+            if addon.getSetting('use_picons_server') == 'true':
+                list_item.setArt({'icon' : 'http://' + addon.getSetting('picons_server_ip') + ':' + addon.getSetting('picons_server_port') + '/picons/' + quote(channels_list[number]['name'])}) 
             url = get_url(action='edit_channel_group_add_channel', group = group, channel = channels_list[number]['name'])  
             xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
     xbmcplugin.endOfDirectory(_handle,cacheToDisc = False)
