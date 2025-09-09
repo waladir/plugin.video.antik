@@ -9,6 +9,7 @@
 	</category>
 	<category label="30010">
                 <setting label="30011" type="bool" id="hide_settings" default="false"/>
+                <setting label="Povolit rádia" type="bool" id="enable_radio" default="false"/>
                 <setting label="Picons Server" type="lsep"/>
                 <setting label="Pro loga kanálů použít Picons Server" type="bool" id="use_picons_server" default="false"/>
                 <setting label="IP adresa" type="text" id="picons_server_ip" default="127.0.0.1"/>

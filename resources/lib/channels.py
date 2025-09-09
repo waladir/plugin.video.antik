@@ -278,7 +278,20 @@ class Channels:
                 image = response['data'][channel]['logo']
             else:
                 image = None
-            channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'],  'visible' : True}})
+            channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'], 'radio' : 0, 'visible' : True}})
+
+        if addon.getSetting('enable_radio') == 'true':
+            post = {'type' : 'RADIO'}
+            response = api.call_api(api = 'channels', method = 'post', data = post, cookies = session.get_cookies())
+            if 'data' not in response:
+                xbmcgui.Dialog().notification('Antik TV',addon.getLocalizedString(300211), xbmcgui.NOTIFICATION_ERROR, 5000)
+                sys.exit() 
+            for channel in response['data']:
+                if 'logo' in response['data'][channel]:
+                    image = response['data'][channel]['logo']
+                else:
+                    image = None
+                channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'], 'radio' : 1, 'visible' : True}})
         return channels
 
     def load_channels(self):
@@ -397,6 +410,8 @@ class Channels:
                     self.channels[channel].update({'archive' : antik_channels[channel]['archive']})                    
                 if 'adult' not in self.channels[channel] or self.channels[channel]['adult'] != antik_channels[channel]['adult']:
                     self.channels[channel].update({'adult' : antik_channels[channel]['adult']})                    
+                if 'radio' not in self.channels[channel] or self.channels[channel]['radio'] != antik_channels[channel]['radio']:
+                    self.channels[channel].update({'radio' : antik_channels[channel]['radio']})                    
             else:
                 max_number = max_number + 1
                 antik_channels[channel]['channel_number'] = max_number

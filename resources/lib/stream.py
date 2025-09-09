@@ -10,6 +10,7 @@ from resources.lib.session import Session
 from resources.lib.api import API
 from resources.lib.epg import get_channel_epg
 from resources.lib.utils import get_api_url
+from resources.lib.channels import Channels
 
 if len(sys.argv) > 1:
     _handle = int(sys.argv[1])
@@ -27,16 +28,19 @@ def play_live(id):
     addon = xbmcaddon.Addon()
     session = Session()
     api = API()
+    channels = Channels()
+    channels_list = channels.get_channels_list('id')   
     post = {'channel' : id }
     response = api.call_api(api = 'channel/detail', data = post, method = 'post', cookies = session.get_cookies())
     if 'data' in response and 'streams' in response['data'] and len(response['data']['streams']) > 0:
         url = response['data']['streams'][0]['url']
         list_item = xbmcgui.ListItem(path = url)
-        list_item.setProperty('inputstream', 'inputstream.adaptive')
         if response['data']['streams'][0]['playlist'] == 'm3u8':
-            list_item.setProperty('inputstream', 'inputstream.adaptive')
-            list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
+            if 'radio' not in channels_list[id] or channels_list[id]['radio'] == 0:
+                list_item.setProperty('inputstream', 'inputstream.adaptive')
+                list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
         else:
+            list_item.setProperty('inputstream', 'inputstream.adaptive')
             list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
             list_item.setMimeType('application/dash+xml')
         if 'drm' in response['data']['streams'][0]:
@@ -51,14 +55,17 @@ def play_archive(id, start, stop):
     addon = xbmcaddon.Addon()
     session = Session()
     api = API()
+    channels = Channels()
+    channels_list = channels.get_channels_list('id')   
     post = {'channelIdentifier' : id, 'showStart' : start, 'showStop' : stop}
     response = api.call_api(api = 'archive/verify', data = post, method = 'post', cookies = session.get_cookies())
     if 'showIdentifier' in response and len(response['showIdentifier']) > 0:
         url = get_api_url() + 'archive/playShow/' + response['showIdentifier']
         list_item = xbmcgui.ListItem(path = url)
-        list_item.setProperty('inputstream', 'inputstream.adaptive')
-        list_item.setProperty('inputstream.adaptive.manifest_headers', 'cookie=' + urlencode(session.get_cookies()))
-        list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
+        if 'radio' not in channels_list[id] or channels_list[id]['radio'] == 0:
+            list_item.setProperty('inputstream', 'inputstream.adaptive')
+            list_item.setProperty('inputstream.adaptive.manifest_headers', 'cookie=' + urlencode(session.get_cookies()))
+            list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
         list_item.setContentLookup(False)       
         xbmcplugin.setResolvedUrl(_handle, True, list_item)
     else:

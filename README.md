@@ -4,6 +4,9 @@
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
 
+v1.0.8 (9.9.2025)<br>
+- přidání rádií (nutno povolit v nastavení)<br><br>
+
 v1.0.7 (8.6.2025)<br>
 - přidání podpory Picons Serveru<br><br>
 
@@ -15,7 +18,4 @@ v1.0.5 (22.4.2025)<br>
 
 v1.0.4 (15.4.2025)<br>
 - oprava přehrávání archivu (posun začátku)<br><br>
-
-v1.0.3 (21.2.2025)<br>
-- ošetření chybějících žánrů v datech<br><br>
 </p>

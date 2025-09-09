@@ -21,6 +21,16 @@ def get_live_epg():
                     endts = int(datetime.fromisoformat(item['Stop']).timestamp())
                     if time.time() >= startts and time.time() <= endts:
                         epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : channel['id'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
+        post = {'type' : 'RADIO'}
+        response = api.call_api(api = 'channels', method = 'post', data = post, cookies = session.get_cookies())
+        if 'epg' in response:
+            for channel in response['epg']:
+                if 'content' in channel and channel['content'] is not None:
+                    for item in channel['content']:
+                        startts = int(datetime.fromisoformat(item['Start']).timestamp())
+                        endts = int(datetime.fromisoformat(item['Stop']).timestamp())
+                        if time.time() >= startts and time.time() <= endts:
+                            epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : channel['id'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
         return epg_api(data = epg, key = 'channel_id')
     else:
         return {}
