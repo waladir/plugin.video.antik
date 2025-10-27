@@ -3,6 +3,8 @@
 <h3>Kodi doplněk pro Antik TV (CZ i SK)</h3>
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
+v1.1.0 (27.10.2025)<br>
+- oprava zobrazení archivu<br><br>
 
 v1.0.9 (27.10.2025)<br>
 - oprava překladu<br>
@@ -17,7 +19,4 @@ v1.0.7 (8.6.2025)<br>
 
 v1.0.6 (27.5.2025)<br>
 - ošetření problémových znaků v EPG<br><br>
-
-v1.0.5 (22.4.2025)<br>
-- oprava přehrávání archivu<br><br>
 </p>

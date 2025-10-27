@@ -1,3 +1,6 @@
+v1.0.10 (27.10.2025)
+- oprava zobrazen archivu
+
 v1.0.9 (27.10.2025)
 - oprava překladu
 - ošetření chyb při stahování EPG + přidání pauzy mezi volání API
@@ -11,6 +14,3 @@ v1.0.7 (8.6.2025)
 
 v1.0.6 (27.5.2025)
 - ošetření problémových znaků v EPG
-
-v1.0.5 (22.4.2025)
-- oprava přehrávání archivu

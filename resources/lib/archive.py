@@ -22,6 +22,8 @@ def list_archive(label):
     channels_list = channels.get_channels_list('channel_number')
     for number in sorted(channels_list.keys()):  
         if 'archive' not in channels_list[number] or channels_list[number]['archive'] == True or 'archive_days' not in channels_list[number] or channels_list[number]['archive_days'] != 0:
+            if 'archive_days' not in channels_list[number]:
+                channels_list[number]['archive_days'] = 7
             list_item = xbmcgui.ListItem(label=channels_list[number]['name'])
             if addon.getSetting('use_picons_server') == 'true':
                 list_item.setArt({'icon' : 'http://' + addon.getSetting('picons_server_ip') + ':' + addon.getSetting('picons_server_port') + '/picons/' + quote(channels_list[number]['name'])}) 
