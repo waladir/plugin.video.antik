@@ -4,6 +4,11 @@
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
 
+v1.0.9 (27.10.2025)<br>
+- oprava překladu<br>
+- ošetření chyb při stahování EPG + přidání pauzy mezi volání API<br>
+- zohlednění počtu dní, pro které má kanál dostupný archiv<br><br>
+
 v1.0.8 (9.9.2025)<br>
 - přidání rádií (nutno povolit v nastavení)<br><br>
 
@@ -15,7 +20,4 @@ v1.0.6 (27.5.2025)<br>
 
 v1.0.5 (22.4.2025)<br>
 - oprava přehrávání archivu<br><br>
-
-v1.0.4 (15.4.2025)<br>
-- oprava přehrávání archivu (posun začátku)<br><br>
 </p>

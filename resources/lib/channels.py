@@ -278,7 +278,7 @@ class Channels:
                 image = response['data'][channel]['logo']
             else:
                 image = None
-            channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'], 'radio' : 0, 'visible' : True}})
+            channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'], 'archive_days' : response['data'][channel]['meta']['archive_days'], 'radio' : 0, 'visible' : True}})
 
         if addon.getSetting('enable_radio') == 'true':
             post = {'type' : 'RADIO'}
@@ -291,7 +291,7 @@ class Channels:
                     image = response['data'][channel]['logo']
                 else:
                     image = None
-                channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'], 'radio' : 1, 'visible' : True}})
+                channels.update({response['data'][channel]['id_content'] : {'id' : response['data'][channel]['id_content'], 'channel_number' : len(channels) + 1, 'antik_number' : int(response['data'][channel]['id']), 'name' : response['data'][channel]['name'], 'logo' : image, 'archive' : response['data'][channel]['meta']['archive'], 'adult' : response['data'][channel]['meta']['adult'], 'archive_days' : response['data'][channel]['meta']['archive_days'], 'radio' : 1, 'visible' : True}})
         return channels
 
     def load_channels(self):
@@ -412,6 +412,8 @@ class Channels:
                     self.channels[channel].update({'adult' : antik_channels[channel]['adult']})                    
                 if 'radio' not in self.channels[channel] or self.channels[channel]['radio'] != antik_channels[channel]['radio']:
                     self.channels[channel].update({'radio' : antik_channels[channel]['radio']})                    
+                if 'archive_days' not in self.channels[channel] or self.channels[channel]['archive_days'] != antik_channels[channel]['archive_days']:
+                    self.channels[channel].update({'archive_days' : antik_channels[channel]['archive_days']})                    
             else:
                 max_number = max_number + 1
                 antik_channels[channel]['channel_number'] = max_number

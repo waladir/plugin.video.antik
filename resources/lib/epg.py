@@ -57,16 +57,19 @@ def get_channels_epg(channels):
     api = API()
     epg = []
     for day in range(-7, 7, 1):
-        post = {'date': datetime.fromtimestamp(today_start_ts + (day* 60*60*24)).strftime('%Y-%m-%d') ,'offset' : 0, 'limit': 200, 'filter' : channels, 'search' : ''}
-        response = api.call_api(api = 'epg/channels', data = post, method = 'post', cookies = session.get_cookies())    
-        for channel in response:
-            if 'epg' in channel:
-                for item in channel['epg']:
-                    startts = int(datetime.fromisoformat(item['Start']).timestamp())
-                    endts = int(datetime.fromisoformat(item['Stop']).timestamp())
-                    epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
+        try:
+            post = {'date': datetime.fromtimestamp(today_start_ts + (day* 60*60*24)).strftime('%Y-%m-%d') ,'offset' : 0, 'limit': 200, 'filter' : channels, 'search' : ''}
+            response = api.call_api(api = 'epg/channels', data = post, method = 'post', cookies = session.get_cookies())    
+            for channel in response:
+                if 'epg' in channel:
+                    for item in channel['epg']:
+                        startts = int(datetime.fromisoformat(item['Start']).timestamp())
+                        endts = int(datetime.fromisoformat(item['Stop']).timestamp())
+                        epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : item['Description'], 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
+            time.sleep(1)
+        except Exception:
+            pass
     return epg
-
 
 def epg_api(data, key):
     epg = {}

@@ -1,3 +1,8 @@
+v1.0.9 (27.10.2025)
+- oprava překladu
+- ošetření chyb při stahování EPG + přidání pauzy mezi volání API
+- zohlednění počtu dní, pro které má kanál dostupný archiv
+
 v1.0.8 (9.9.2025)
 - přidání rádií (nutno povolit v nastavení)
 
@@ -9,6 +14,3 @@ v1.0.6 (27.5.2025)
 
 v1.0.5 (22.4.2025)
 - oprava přehrávání archivu
-
-v1.0.4 (15.4.2025)
-- oprava přehrávání archivu (posun začátku)

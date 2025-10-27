@@ -304,7 +304,7 @@ msgstr "Opravdu smazat skupinu kanálů"
 # data
 
 msgctxt "#300400"
-msgid "Pondělok"
+msgid "Pondelok"
 msgstr "Pondělí"
 
 msgctxt "#300401"
@@ -328,7 +328,7 @@ msgid "Sobota"
 msgstr "Sobota"
 
 msgctxt "#300406"
-msgid "Neděľa"
+msgid "Nedeľa"
 msgstr "Neděle"
 
 msgctxt "#300407"
@@ -336,7 +336,7 @@ msgid "Po"
 msgstr "Po"
 
 msgctxt "#300408"
-msgid "Út"
+msgid "Ut"
 msgstr "Út"
 
 msgctxt "#300409"

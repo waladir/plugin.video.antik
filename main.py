@@ -54,7 +54,7 @@ def router(paramstring):
         elif params['action'] == 'list_archive':
             list_archive(label = params['label'])
         elif params['action'] == 'list_archive_days':
-            list_archive_days(id = params['id'], label = params['label'])
+            list_archive_days(id = params['id'], days = params['days'], label = params['label'])
         elif params['action'] == 'list_program':
             list_program(id = params['id'], day_min = params['day_min'], label = params['label'])
         elif params['action'] == 'play_archive':

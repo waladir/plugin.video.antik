@@ -302,7 +302,7 @@ msgstr ""
 # data
 
 msgctxt "#300400"
-msgid "Pondělok"
+msgid "Pondelok"
 msgstr ""
 
 msgctxt "#300401"
@@ -326,7 +326,7 @@ msgid "Sobota"
 msgstr ""
 
 msgctxt "#300406"
-msgid "Neděľa"
+msgid "Nedeľa"
 msgstr ""
 
 msgctxt "#300407"
@@ -334,7 +334,7 @@ msgid "Po"
 msgstr ""
 
 msgctxt "#300408"
-msgid "Út"
+msgid "Ut"
 msgstr ""
 
 msgctxt "#300409"
