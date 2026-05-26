@@ -4,6 +4,9 @@
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
 
+v1.2.0 (26.5.2026)<br>
+- možnost výběru kvality streamu pro živé vysílání<br><br>
+
 v1.1.3 (17.4.2026)<br>
 - ošetření chyby v EPG datech<br><br>
 

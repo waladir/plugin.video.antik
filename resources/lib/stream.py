@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
@@ -12,6 +13,7 @@ from resources.lib.api import API
 from resources.lib.epg import get_channel_epg
 from resources.lib.utils import get_api_url, get_isa_version, get_kodi_version, ua
 from resources.lib.channels import Channels
+from resources.lib.quality import apply_to_listitem as apply_quality
 
 if len(sys.argv) > 1:
     _handle = int(sys.argv[1])
@@ -38,16 +40,21 @@ def play_live(id):
     if 'data' in response and 'streams' in response['data'] and len(response['data']['streams']) > 0:
         url = response['data']['streams'][0]['url']
         list_item = xbmcgui.ListItem(path = url)
+        uses_isa = False
         if response['data']['streams'][0]['playlist'] == 'm3u8':
             if 'radio' not in channels_list[id] or channels_list[id]['radio'] == 0:
                 list_item.setProperty('inputstream', 'inputstream.adaptive')
+                uses_isa = True
                 if kodi<21:
                     list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
         else:
             list_item.setProperty('inputstream', 'inputstream.adaptive')
+            uses_isa = True
             if kodi<21:
                 list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
             list_item.setMimeType('application/dash+xml')
+        if uses_isa:
+            apply_quality(list_item)
         if 'drm' in response['data']['streams'][0]:
             drm_headers = urlencode({'Content-Type' : 'application/octet-stream', 'User-Agent' : ua})
             if isa >= 22:

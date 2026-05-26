@@ -3,24 +3,26 @@
 	<category label="30000">
                 <setting label="30001" type="text" id="username" default=""/>
                 <setting label="30002" type="text" id="password" option="hidden" enable="!eq(-1,false)" default=""/>
-                <setting label="Device Id" type="text" id="deviceid" enable="false" default=""/>                
+                <setting label="Device Id" type="text" id="deviceid" enable="false" default=""/>
                 <setting label="Antik TV" type="select" id="antik" values="SK|CZ" default="SK"/>
                 <setting label="Nová session" type="action" action="RunPlugin(plugin://plugin.video.antik?action=reset_session)"/>
 	</category>
 	<category label="30010">
                 <setting label="30011" type="bool" id="hide_settings" default="false"/>
                 <setting label="Povolit rádia" type="bool" id="enable_radio" default="false"/>
+                <setting label="30053" type="lsep"/>
+                <setting label="30049" type="select" id="stream_quality" lvalues="30050|30051|30052" default="0"/>
                 <setting label="Picons Server" type="lsep"/>
                 <setting label="Pro loga kanálů použít Picons Server" type="bool" id="use_picons_server" default="false"/>
                 <setting label="IP adresa" type="text" id="picons_server_ip" default="127.0.0.1"/>
                 <setting label="Port" type="number" id="picons_server_port" default="8083"/>
-	</category>    
+	</category>
 	<category label="Widevine">
                 <setting label="Zobrazení informací" type="action" action="RunScript(script.module.inputstreamhelper,info)"/>
-                <setting label="Nastavení InputStream Helper" type="action" action="Addon.OpenSettings(script.module.inputstreamhelper)" option="close"/>                              
-                <setting label="(Re)instalovat Widevine CDM" type="action" action="RunScript(script.module.inputstreamhelper,widevine_install)" visible="!system.platform.android"/>  
-                <setting label="Odstranit Widevine CDM..." type="action" action="RunScript(script.module.inputstreamhelper, widevine_remove)" visible="!system.platform.android"/>        
-	</category>      
+                <setting label="Nastavení InputStream Helper" type="action" action="Addon.OpenSettings(script.module.inputstreamhelper)" option="close"/>
+                <setting label="(Re)instalovat Widevine CDM" type="action" action="RunScript(script.module.inputstreamhelper,widevine_install)" visible="!system.platform.android"/>
+                <setting label="Odstranit Widevine CDM..." type="action" action="RunScript(script.module.inputstreamhelper, widevine_remove)" visible="!system.platform.android"/>
+	</category>
 	<category label="IPTV Simple Client">
                 <setting label="30020" type="folder" id="output_dir" default=""/>
                 <setting label="30021" type="bool" id="autogen" default="false"/>
@@ -30,9 +32,9 @@
                 <setting label="Catchup mod" type="select" id="catchup_mode" values="append|default" default="append"/>
                 <setting label="30023" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_playlist)"/>
                 <setting label="30024" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_epg)"/>
-	</category>      
+	</category>
         <category label="30030">
                 <setting label="30031" type="bool" id="log_request_url" default="false"/>
                 <setting label="30032" type="bool" id="log_response" default="false"/>
-	</category>    
+	</category>
 </settings>

@@ -366,3 +366,25 @@ msgstr "So"
 msgctxt "#300413"
 msgid "Ne"
 msgstr "Ne"
+
+# kvalita streamu
+
+msgctxt "#30049"
+msgid "Kvalita živého vysielania"
+msgstr "Kvalita živého vysílání"
+
+msgctxt "#30050"
+msgid "Vysoká"
+msgstr "Vysoká"
+
+msgctxt "#30051"
+msgid "Stredná"
+msgstr "Střední"
+
+msgctxt "#30052"
+msgid "Nízka"
+msgstr "Nízká"
+
+msgctxt "#30053"
+msgid "Video"
+msgstr ""
