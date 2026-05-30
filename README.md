@@ -4,8 +4,8 @@
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
 
-v1.2.0 (26.5.2026)<br>
-- možnost výběru kvality streamu pro živé vysílání<br><br>
+v1.1.4 (30.5.2026)<br>
+- možnost výběru kvality streamu pro živé vysílání (Grolicek)<br><br>
 
 v1.1.3 (17.4.2026)<br>
 - ošetření chyby v EPG datech<br><br>
@@ -19,9 +19,4 @@ v1.1.1 (7.12.2025)<br>
 
 v1.1.0 (27.10.2025)<br>
 - oprava zobrazení archivu<br><br>
-
-v1.0.9 (27.10.2025)<br>
-- oprava překladu<br>
-- ošetření chyb při stahování EPG + přidání pauzy mezi volání API<br>
-- zohlednění počtu dní, pro které má kanál dostupný archiv<br><br>
 </p>
