@@ -1,3 +1,6 @@
+v1.2.0 (26.5.2026)
+- možnost výběru kvality streamu pro živé vysílání
+
 v1.1.3 (17.4.2026)
 - ošetření chyby v EPG datech
 
