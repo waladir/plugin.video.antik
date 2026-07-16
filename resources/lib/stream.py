@@ -37,34 +37,49 @@ def play_live(id):
     channels_list = channels.get_channels_list('id')   
     post = {'channel' : id }
     response = api.call_api(api = 'channel/detail', data = post, method = 'post', cookies = session.get_cookies())
+
     if 'data' in response and 'streams' in response['data'] and len(response['data']['streams']) > 0:
         url = response['data']['streams'][0]['url']
-        list_item = xbmcgui.ListItem(path = url)
+        
+        list_item = xbmcgui.ListItem()
         uses_isa = False
         if response['data']['streams'][0]['playlist'] == 'm3u8':
             if 'radio' not in channels_list[id] or channels_list[id]['radio'] == 0:
                 list_item.setProperty('inputstream', 'inputstream.adaptive')
                 uses_isa = True
-                if kodi<21:
+                if kodi < 21:
                     list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
         else:
             list_item.setProperty('inputstream', 'inputstream.adaptive')
             uses_isa = True
-            if kodi<21:
+            if kodi < 21:
                 list_item.setProperty('inputstream.adaptive.manifest_type', 'mpd')
             list_item.setMimeType('application/dash+xml')
+            
         if uses_isa:
             apply_quality(list_item)
+            stream_headers = f"Referer=https://webtv.tv/"
+            list_item.setProperty('inputstream.adaptive.stream_headers', stream_headers)
+            if kodi < 21:
+                list_item.setProperty('inputstream.adaptive.manifest_headers', stream_headers)
+
         if 'drm' in response['data']['streams'][0]:
-            drm_headers = urlencode({'Content-Type' : 'application/octet-stream', 'User-Agent' : ua})
+            license_url = 'https://drm.antik.sk/widevine/key'
+            drm_headers = urlencode({'Content-Type': 'application/octet-stream', 'User-Agent': ua, 'Referer': 'https://webtv.tv/'})
             if isa >= 22:
-                list_item.setProperty('inputstream.adaptive.drm', json.dumps({'com.widevine.alpha' : {'license' : {'server_url' : 'https://drm.antik.sk/widevine/key', 'req_headers': drm_headers}}}))
+                drm_config = {
+                    'com.widevine.alpha': {'license': {'server_url': license_url, 'req_headers': drm_headers}}}
+                list_item.setProperty('inputstream.adaptive.drm', json.dumps(drm_config))
             elif isa >= 21.5:
-                list_item.setProperty('inputstream.adaptive.drm_legacy', 'com.widevine.alpha|https://drm.antik.sk/widevine/key|' + drm_headers)
+                list_item.setProperty('inputstream.adaptive.drm_legacy', f'com.widevine.alpha|{license_url}|{drm_headers}')
             else:
                 list_item.setProperty('inputstream.adaptive.license_type', 'com.widevine.alpha')
-                list_item.setProperty('inputstream.adaptive.license_key', 'https://drm.antik.sk/widevine/key||R{SSM}|')                
+                list_item.setProperty('inputstream.adaptive.license_key', f'{license_url}||R{{SSM}}|{drm_headers}')
 
+        if kodi >= 21:
+            url = f"{url}|Referer=https://webtv.tv/"
+        
+        list_item.setPath(url)
         list_item.setContentLookup(False)       
         xbmcplugin.setResolvedUrl(_handle, True, list_item)
     else:

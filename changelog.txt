@@ -1,3 +1,6 @@
+v1.1.5 (16.7.2026)
+- upravené přehrávání streamů
+
 v1.1.4 (30.5.2026)
 - možnost výběru kvality streamu pro živé vysílání (Grolicek)
 
@@ -10,7 +13,3 @@ v1.1.2 (1.2.2026)
 
 v1.1.1 (7.12.2025)
 - odstranění deprecated funkcí utcnow a setInfo
-
-v1.1.0 (27.10.2025)
-- oprava zobrazení archivu
-

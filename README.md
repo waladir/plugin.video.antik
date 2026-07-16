@@ -4,6 +4,9 @@
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
 
+v1.1.5 (16.7.2026)<br>
+- upravené přehrávání streamů<br><br>
+
 v1.1.4 (30.5.2026)<br>
 - možnost výběru kvality streamu pro živé vysílání (Grolicek)<br><br>
 
@@ -16,7 +19,4 @@ v1.1.2 (1.2.2026)<br>
 
 v1.1.1 (7.12.2025)<br>
 - odstranění deprecated funkcí utcnow a setInfo<br><br>
-
-v1.1.0 (27.10.2025)<br>
-- oprava zobrazení archivu<br><br>
 </p>
