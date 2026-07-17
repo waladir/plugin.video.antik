@@ -58,14 +58,15 @@ def play_live(id):
             
         if uses_isa:
             apply_quality(list_item)
-            stream_headers = f"Referer=https://webtv.tv/"
+            stream_headers = "Referer=https://webtv.tv&User-Agent=" + ua
             list_item.setProperty('inputstream.adaptive.stream_headers', stream_headers)
             if kodi < 21:
                 list_item.setProperty('inputstream.adaptive.manifest_headers', stream_headers)
 
         if 'drm' in response['data']['streams'][0]:
             license_url = 'https://drm.antik.sk/widevine/key'
-            drm_headers = urlencode({'Content-Type': 'application/octet-stream', 'User-Agent': ua, 'Referer': 'https://webtv.tv/'})
+            drm_headers = urlencode({'Content-Type': 'application/octet-stream', 'User-Agent': ua})
+            
             if isa >= 22:
                 drm_config = {
                     'com.widevine.alpha': {'license': {'server_url': license_url, 'req_headers': drm_headers}}}
@@ -76,14 +77,18 @@ def play_live(id):
                 list_item.setProperty('inputstream.adaptive.license_type', 'com.widevine.alpha')
                 list_item.setProperty('inputstream.adaptive.license_key', f'{license_url}||R{{SSM}}|{drm_headers}')
 
+        headers = f"Referer=https://webtv.tv&User-Agent={ua}"
+        list_item.setProperty('inputstream.adaptive.stream_headers', headers)
+        list_item.setProperty('inputstream.adaptive.manifest_update_parameter', f"|{headers}")
         if kodi >= 21:
-            url = f"{url}|Referer=https://webtv.tv/"
+            url = f"{url}|{headers}"
         
         list_item.setPath(url)
         list_item.setContentLookup(False)       
         xbmcplugin.setResolvedUrl(_handle, True, list_item)
     else:
         xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300218), xbmcgui.NOTIFICATION_ERROR, 5000)
+
 
 def play_archive(id, start, stop):
     kodi = get_kodi_version()
