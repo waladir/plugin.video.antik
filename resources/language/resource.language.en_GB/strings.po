@@ -53,6 +53,10 @@ msgctxt "#30026"
 msgid "Počet dní pre sťahovanie EPG dopredu"
 msgstr ""
 
+msgctxt "#30027"
+msgid "EPG pre všeetky kanály"
+msgstr ""
+
 msgctxt "#30030"
 msgid "Logovanie"
 msgstr ""

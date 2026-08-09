@@ -93,8 +93,12 @@ def generate_epg(output_file = '', show_progress = True):
     addon = xbmcaddon.Addon()
     channels_ids = []
     channels = Channels()
-    channels_list = channels.get_channels_list('channel_number', visible_filter = False)
-    channels_list_by_id = channels.get_channels_list('id', visible_filter = False)
+    if addon.getSetting('all_channels') == 'true':
+        filter_channels = False
+    else:
+        filter_channels = True
+    channels_list = channels.get_channels_list('channel_number', visible_filter = filter_channels)
+    channels_list_by_id = channels.get_channels_list('id', visible_filter = filter_channels)
     if len(channels_list) > 0:
         if save_file_test() == 0:
             xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300315), xbmcgui.NOTIFICATION_ERROR, 5000)

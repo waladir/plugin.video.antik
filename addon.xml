@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.antik" name="Antik TV" provider-name="waladir" version="1.1.6">
+﻿<addon id="plugin.video.antik" name="Antik TV" provider-name="waladir" version="1.1.7">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
     <import addon="script.module.requests" version="2.18.4"/>
@@ -31,6 +31,10 @@ Další informace a podporu najdete na fóru www.xbmc-kodi.cz (https://www.xbmc-
     <platform>all</platform>
     <source>https://github.com/waladir/plugin.video.antik</source>
     <news>
+v1.1.7 (9.8.2026)
+- rozšíření počtu dnů pro generování EPG (20/14)
+- možnost filtrování kanálů pro EPG
+
 v1.1.6 (17.7.2026)
 - upravené přehrávání streamů
 
@@ -42,10 +46,6 @@ v1.1.4 (30.5.2026)
 
 v1.1.3 (17.4.2026)
 - ošetření chyby v EPG datech
-
-v1.1.2 (1.2.2026)
-- zobrazení progresu při manuálním generování EPG
-- možnost nastavit kolik pro kolik dnů zpětně a dopředu se má EPG stahovat
    </news>
     <assets>
         <icon>icon.jpg</icon>

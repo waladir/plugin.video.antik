@@ -26,9 +26,10 @@
 	<category label="IPTV Simple Client">
                 <setting label="30020" type="folder" id="output_dir" default=""/>
                 <setting label="30021" type="bool" id="autogen" default="false"/>
+                <setting label="30027" type="bool" id="all_channels" default="false"/>
                 <setting label="30022" type="slider" id="epg_interval" range="1,1,24" default="12" option="int"/>
-                <setting label="30025" type="slider" id="epg_from" range="1,1,7" default="7" option="int"/>
-                <setting label="30026" type="slider" id="epg_to" range="1,1,7" default="1" option="int"/>
+                <setting label="30025" type="slider" id="epg_from" range="1,1,20" default="7" option="int"/>
+                <setting label="30026" type="slider" id="epg_to" range="1,1,14" default="1" option="int"/>
                 <setting label="Catchup mod" type="select" id="catchup_mode" values="append|default" default="append"/>
                 <setting label="30023" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_playlist)"/>
                 <setting label="30024" type="action" action="RunPlugin(plugin://plugin.video.antik?action=generate_epg)"/>
