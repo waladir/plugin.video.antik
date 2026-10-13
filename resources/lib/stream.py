@@ -101,10 +101,11 @@ def play_archive(id, start, stop):
     response = api.call_api(api = 'archive/verify', data = post, method = 'post', cookies = session.get_cookies())
     if 'showIdentifier' in response and len(response['showIdentifier']) > 0:
         url = get_api_url() + 'archive/playShow/' + response['showIdentifier']
-        list_item = xbmcgui.ListItem(path = url)
+        list_item = xbmcgui.ListItem(path = url + '|Cookie=' + urlencode(session.get_cookies()))
         if 'radio' not in channels_list[id] or channels_list[id]['radio'] == 0:
             list_item.setProperty('inputstream', 'inputstream.adaptive')
             list_item.setProperty('inputstream.adaptive.manifest_headers', 'cookie=' + urlencode(session.get_cookies()))
+            list_item.setProperty('inputstream.adaptive.stream_headers', 'cookie=' + urlencode(session.get_cookies()))
             if kodi < 21:
                 list_item.setProperty('inputstream.adaptive.manifest_type', 'hls')
         list_item.setContentLookup(False)       
