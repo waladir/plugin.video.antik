@@ -12,7 +12,6 @@ addon = xbmcaddon.Addon()
 day_translation = {'1' : addon.getLocalizedString(300400), '2' : addon.getLocalizedString(300401), '3' : addon.getLocalizedString(300402), '4' : addon.getLocalizedString(300403), '5' : addon.getLocalizedString(300404), '6' : addon.getLocalizedString(300405), '0' : addon.getLocalizedString(300406)}  
 day_translation_short = {'1' : addon.getLocalizedString(300407), '2' : addon.getLocalizedString(300408), '3' : addon.getLocalizedString(300409), '4' : addon.getLocalizedString(300410), '5' : addon.getLocalizedString(300411), '6' : addon.getLocalizedString(300412), '0' : addon.getLocalizedString(300413)}
 ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0'
-adone = None
 
 _url = sys.argv[0]
 

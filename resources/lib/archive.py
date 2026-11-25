@@ -53,7 +53,6 @@ def list_program(id, day_min, label):
     addon = xbmcaddon.Addon()
     label = label.replace(addon.getLocalizedString(300112) + ' /','')
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'twshows')
     today_date = datetime.today() 
     today_start_ts = int(time.mktime(datetime(today_date.year, today_date.month, today_date.day) .timetuple()))
     today_end_ts = today_start_ts + 60*60*24 -1

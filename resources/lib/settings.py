@@ -25,8 +25,8 @@ def list_settings(label):
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
     list_item = xbmcgui.ListItem(label = addon.getLocalizedString(300102))
-    url = get_url(action='addon_settings', label = addon.getLocalizedString(300102))  
-    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    url = get_url(action='addon_settings', label = addon.getLocalizedString(300102))
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
 
     xbmcplugin.endOfDirectory(_handle)
 
@@ -42,8 +42,8 @@ def list_devices(label):
             list_item = xbmcgui.ListItem(label = '[B]' + devices[id]['name'] + '[/B]')
         else:
             list_item = xbmcgui.ListItem(label = devices[id]['name'])
-        url = get_url(action='remove_device', id = id, name = devices[id]['name'])  
-        xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+        url = get_url(action='remove_device', id = id, name = devices[id]['name'])
+        xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     xbmcplugin.endOfDirectory(_handle)
 
 def remove_device(id, name):
@@ -52,7 +52,6 @@ def remove_device(id, name):
     if response == True:
         session = Session()
         session.delete_device(id, name)
-        session.create_session()
         xbmc.executebuiltin('Container.Refresh')
 
 class Settings:

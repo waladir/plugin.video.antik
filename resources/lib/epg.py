@@ -43,7 +43,7 @@ def get_channel_epg(id, from_ts, to_ts):
     epg = []
     post = {'date': datetime.fromtimestamp(from_ts).strftime('%Y-%m-%d') ,'offset' : 0, 'limit': 200, 'filter' : [id], 'search' : ''}
     response = api.call_api(api = 'epg/channels', data = post, method = 'post', cookies = session.get_cookies())    
-    if len(response) > 0 and 'epg' in response[0]:
+    if isinstance(response, list) and len(response) > 0 and 'epg' in response[0]:
         for item in response[0]['epg']:
             startts = int(datetime.fromisoformat(item['Start']).timestamp())
             endts = int(datetime.fromisoformat(item['Stop']).timestamp())
@@ -70,7 +70,7 @@ def get_channels_epg(channels):
                     for item in channel['epg']:
                         startts = int(datetime.fromisoformat(item['Start']).timestamp())
                         endts = int(datetime.fromisoformat(item['Stop']).timestamp())
-                        epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : str(item['Description']), 'startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
+                        epg.append({'id' : item['SeriesID'], 'title' : item['Title'], 'channel_id' : item['Channel'], 'description' : str(item['Description']) if item['Description'] is not None else '','startts' : startts, 'endts' : endts, 'start' : item['Start'], 'stop' : item['Stop'], 'genres' : item['Genres']})
             time.sleep(1)
         except Exception:
             pass
@@ -112,7 +112,7 @@ def epg_listitem(list_item, epg, logo):
         list_item.setInfo('video', {'mediatype' : 'movie'})   
     if logo is not None:
         list_item.setArt({'icon' : logo}) 
-    if 'description' in epg and len(epg['description']) > 0:
+    if 'description' in epg and epg['description'] is not None and len(epg['description']) > 0:
         if kodi_version >= 20:
             infotag.setPlot(epg['description'])
         else:

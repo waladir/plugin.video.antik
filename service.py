@@ -5,12 +5,8 @@ import time
 import xbmc
 import xbmcaddon
 
-from datetime import datetime, timezone
-
 from resources.lib.iptvsc import generate_epg
 from resources.lib.quality import QualityPlayer
-
-tz_offset = int(datetime.now(timezone.utc).astimezone().utcoffset().total_seconds() / 3600)
 
 addon = xbmcaddon.Addon()
 monitor = xbmc.Monitor()
@@ -36,7 +32,10 @@ while not monitor.abortRequested():
             break
         if addon.getSetting('username') and len(addon.getSetting('username')) > 0 and addon.getSetting('password') and len(addon.getSetting('password')) > 0:
             if addon.getSetting('autogen') == 'true':
-                generate_epg(show_progress = False)
+                try:
+                    generate_epg(show_progress = False)
+                except (Exception, SystemExit) as e:
+                    xbmc.log('Antik TV > chyba při generování EPG: ' + str(e), xbmc.LOGERROR)
         if not addon.getSetting('epg_interval'):
             interval = 12 * 60 * 60
         else:

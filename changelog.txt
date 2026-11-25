@@ -1,3 +1,7 @@
+v1.2.0 (25.11.2026)
+- optimalizace kódu
+- lepší ošetření chyb při generování EPG
+
 v1.1.9 (5.11.2026)
 - oprava přehrávání archivu
 
@@ -8,7 +12,4 @@ v1.1.7 (9.8.2026)
 - rozšíření počtu dnů pro generování EPG (20/14)
 - možnost filtrování kanálů pro EPG
 v1.1.6 (17.7.2026)
-- upravené přehrávání streamů
-
-v1.1.5 (16.7.2026)
 - upravené přehrávání streamů

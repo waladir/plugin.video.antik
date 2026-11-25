@@ -32,8 +32,8 @@ def manage_channels(label):
     url = get_url(action='list_channels_groups', label = label + ' / ' + addon.getLocalizedString(300104))  
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
     list_item = xbmcgui.ListItem(label = addon.getLocalizedString(300105))
-    url = get_url(action='reset_channels_list')  
-    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    url = get_url(action='reset_channels_list')
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     list_item = xbmcgui.ListItem(label = addon.getLocalizedString(300106))
     url = get_url(action='list_channels_list_backups', label = label + ' / ' + addon.getLocalizedString(300106))  
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
@@ -55,8 +55,8 @@ def list_channels_edit(label):
             url = get_url(action='edit_channel', id = channels_list[number]['id'])
             list_item.addContextMenuItems([(addon.getLocalizedString(300302), 'RunPlugin(plugin://' + plugin_id + '?action=change_channels_numbers&from_number=' + str(number) + '&direction=increase)'),       
                                             (addon.getLocalizedString(300303), 'RunPlugin(plugin://' + plugin_id + '?action=change_channels_numbers&from_number=' + str(number) + '&direction=decrease)'),
-                                            (addon.getLocalizedString(300304), 'RunPlugin(plugin://' + plugin_id + '?action=delete_channel&id='  + str(channels_list[number]['id']) + ')')])       
-            xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+                                            (addon.getLocalizedString(300304), 'RunPlugin(plugin://' + plugin_id + '?action=delete_channel&id='  + str(channels_list[number]['id']) + ')')])
+            xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
         xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)
 
 def edit_channel(id):
@@ -68,8 +68,9 @@ def edit_channel(id):
         channels_nums = channels.get_channels_list('channel_number', visible_filter = False)
         if int(new_num) in channels_nums:
             xbmcgui.Dialog().notification('Antik TV', 'Číslo kanálu ' + new_num +  addon.getLocalizedString(300212) + channels_nums[int(new_num)]['name'], xbmcgui.NOTIFICATION_ERROR, 5000)
-        else:  
+        else:
             channels.set_number(id = id, number = new_num)
+            xbmc.executebuiltin('Container.Refresh')
 
 def delete_channel(id):
     channels = Channels()
@@ -88,6 +89,14 @@ def change_channels_numbers(from_number, direction):
         if change > 0:
             if direction == 'decrease':
                 change = change * -1
+                channels_nums = channels.get_channels_list('channel_number', visible_filter = False)
+                for number in range(int(from_number) + change, int(from_number)):
+                    if number < 1:
+                        xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300213), xbmcgui.NOTIFICATION_ERROR, 5000)
+                        return
+                    if number in channels_nums:
+                        xbmcgui.Dialog().notification('Antik TV', 'Číslo kanálu ' + str(number) + addon.getLocalizedString(300212) + channels_nums[number]['name'], xbmcgui.NOTIFICATION_ERROR, 5000)
+                        return
             channels.change_channels_numbers(from_number, change)
             xbmc.executebuiltin('Container.Refresh')
         else:  
@@ -107,18 +116,19 @@ def list_channels_list_backups(label):
             item = 'Záloha z ' + date_list[2] + '.' + date_list[1] + '.' + date_list[0] + ' ' + date_list[3] + ':' + date_list[4] + ':' + date_list[5]
             list_item = xbmcgui.ListItem(label = item)
             url = get_url(action='restore_channels', backup = backup)
-            xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+            xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
         xbmcplugin.endOfDirectory(_handle, cacheToDisc = False)
     else:
-        xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300214), xbmcgui.NOTIFICATION_INFO, 5000)          
+        xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300214), xbmcgui.NOTIFICATION_INFO, 5000)
+        xbmcplugin.endOfDirectory(_handle, succeeded = False)
 
 def list_channels_groups(label):
     addon = xbmcaddon.Addon()
     xbmcplugin.setPluginCategory(_handle, label)    
     channels_groups = Channels_groups()
     list_item = xbmcgui.ListItem(label='Nová skupina')
-    url = get_url(action='add_channel_group', label = 'Nová skupina')  
-    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    url = get_url(action='add_channel_group', label = 'Nová skupina')
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     if channels_groups.selected == None:
         list_item = xbmcgui.ListItem(label='[B]' + addon.getLocalizedString(300107) + '[/B]')
     else:  
@@ -164,8 +174,8 @@ def edit_channel_group(group, label):
     url = get_url(action='edit_channel_group_list_channels', group = group, label = group + ' / ' + addon.getLocalizedString(300109))  
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
     list_item = xbmcgui.ListItem(label = addon.getLocalizedString(300110))
-    url = get_url(action='edit_channel_group_add_all_channels', group = group, label = group + ' / ' + addon.getLocalizedString(300110))   
-    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    url = get_url(action='edit_channel_group_add_all_channels', group = group, label = group + ' / ' + addon.getLocalizedString(300110))
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     if group in channels_groups.channels:
         for channel in channels_groups.channels[group]:
             if channel in channels_list:
@@ -203,8 +213,8 @@ def edit_channel_group_list_channels(group, label):
             list_item = xbmcgui.ListItem(label=str(number) + ' ' + channels_list[number]['name'])
             if addon.getSetting('use_picons_server') == 'true':
                 list_item.setArt({'icon' : 'http://' + addon.getSetting('picons_server_ip') + ':' + addon.getSetting('picons_server_port') + '/picons/' + quote(channels_list[number]['name'])}) 
-            url = get_url(action='edit_channel_group_add_channel', group = group, channel = channels_list[number]['name'])  
-            xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+            url = get_url(action='edit_channel_group_add_channel', group = group, channel = channels_list[number]['name'])
+            xbmcplugin.addDirectoryItem(_handle, url, list_item, False)
     xbmcplugin.endOfDirectory(_handle,cacheToDisc = False)
 
 def edit_channel_group_add_channel(group, channel):
@@ -228,9 +238,10 @@ class Channels:
         self.valid_to = -1
         self.load_channels()
 
-    def set_visibility(self, id, visibility):
+    def set_visibility(self, id, visibility, save = True):
         self.channels[id].update({'visible' : visibility})
-        self.save_channels()
+        if save == True:
+            self.save_channels()
 
     def set_number(self, id, number):
         if id in self.channels:
@@ -365,6 +376,7 @@ class Channels:
 
     def restore_channels(self, backup):
         addon = xbmcaddon.Addon()
+        data = None
         if os.path.exists(backup):
             try:
                 with codecs.open(backup, 'r', encoding='utf-8') as file:
@@ -372,7 +384,7 @@ class Channels:
                         data = row[:-1]
             except IOError as error:
                 if error.errno != 2:
-                    xbmcgui.Dialog().notification('Rebi.tv', addon.getLocalizedString(300319), xbmcgui.NOTIFICATION_ERROR, 5000)
+                    xbmcgui.Dialog().notification('Antik TV',addon.getLocalizedString(300319), xbmcgui.NOTIFICATION_ERROR, 5000)
             if data is not None:
                 try:            
                     data = json.loads(data)
@@ -483,17 +495,19 @@ class Channels_groups:
             self.selected = None
             channels_list = channels.get_channels_list(visible_filter = False)
             for channel in channels_list:
-                channels.set_visibility(channel, True)
+                channels.set_visibility(channel, True, save = False)
+            channels.save_channels()
         else:
             self.selected = group
             if group in self.channels and len(self.channels[group]):
                 channels_list = channels.get_channels_list(visible_filter = False)
                 for channel in channels_list:
                     if channels_list[channel]['name'] in self.channels[group]:
-                        channels.set_visibility(channel, True)
+                        channels.set_visibility(channel, True, save = False)
                     else:
-                        channels.set_visibility(channel, False)
-        self.save_channels_groups()      
+                        channels.set_visibility(channel, False, save = False)
+                channels.save_channels()
+        self.save_channels_groups()
 
     def load_channels_groups(self):
         addon = xbmcaddon.Addon()

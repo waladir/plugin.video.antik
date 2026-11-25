@@ -4,6 +4,10 @@
 <p>
 <a href="https://www.xbmc-kodi.cz/prispevek-antik-tv--13396">Vlákno na fóru XBMC-Kodi.cz</a><br><br>
 
+v1.2.0 (25.11.2026)<br>
+- optimalizace kódu<br>
+- lepší ošetření chyb při generování EPG<br><br>
+
 v1.1.9 (5.11.2026)<br>
 - oprava přehrávání archivu<br><br>
 
@@ -15,8 +19,5 @@ v1.1.7 (9.8.2026)<br>
 - možnost filtrování kanálů pro EPG<br><br>
 
 v1.1.6 (17.7.2026)<br>
-- upravené přehrávání streamů<br><br>
-
-v1.1.5 (16.7.2026)<br>
 - upravené přehrávání streamů<br><br>
 </p>

@@ -13,8 +13,6 @@ from resources.lib.channels import Channels
 from resources.lib.utils import plugin_id, replace_by_html_entity
 from resources.lib.epg import get_channels_epg
 
-tz_offset = int(datetime.now(timezone.utc).astimezone().utcoffset().total_seconds() / 3600)
-
 def save_file_test():
     addon = xbmcaddon.Addon()  
     try:
@@ -77,11 +75,6 @@ def generate_playlist(output_file = ''):
                     line = '#EXTINF:-1 tvg-chno="' + str(number) + '" tvg-id="' + channels_list[number]['name'] + '" tvh-epg="0" tvg-logo="' + logo + '",' + channels_list[number]['name']                    
                 file.write(bytearray((line + '\n').encode('utf-8')))
                 line = 'plugin://' + plugin_id + '/?action=iptsc_play_stream&id=' + str(channels_list[number]['id'])
-                if addon.getSetting('isa') == 'true':
-                    file.write(bytearray(('#KODIPROP:inputstream=inputstream.ffmpegdirect\n').encode('utf-8')))
-                    file.write(bytearray(('#KODIPROP:inputstream.ffmpegdirect.stream_mode=timeshift\n').encode('utf-8')))
-                    file.write(bytearray(('#KODIPROP:inputstream.ffmpegdirect.is_realtime_stream=true\n').encode('utf-8')))
-                    file.write(bytearray(('#KODIPROP:mimetype=video/mp2t\n').encode('utf-8')))
                 file.write(bytearray((line + '\n').encode('utf-8')))
             file.close()
             xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300314), xbmcgui.NOTIFICATION_INFO, 5000)    
@@ -126,7 +119,7 @@ def generate_epg(output_file = '', show_progress = True):
                     channel = channels_list[number]['name']
                     content = content + '    <channel id="' + replace_by_html_entity(channel) + '">\n'
                     content = content + '            <display-name lang="cs">' + replace_by_html_entity(channel) + '</display-name>\n'
-                    content = content + '            <icon src="' + logo + '" />\n'
+                    content = content + '            <icon src="' + replace_by_html_entity(logo) + '" />\n'
                     content = content + '    </channel>\n'
                 file.write(bytearray((content).encode('utf-8')))
                 if show_progress == True:
@@ -139,9 +132,9 @@ def generate_epg(output_file = '', show_progress = True):
                         dialog.update(int(i/len(channels_ids)*100))
                     epg = get_channels_epg(channels = channels_ids[i:i+10])
                     for epg_item in epg:
-                        starttime = datetime.fromtimestamp(epg_item['startts']).strftime('%Y%m%d%H%M%S')
-                        endtime = datetime.fromtimestamp(epg_item['endts']).strftime('%Y%m%d%H%M%S')
-                        content = content + '    <programme start="' + starttime + ' +0' + str(tz_offset) + '00" stop="' + endtime + ' +0' + str(tz_offset) + '00" channel="' + replace_by_html_entity(channels_list_by_id[epg_item['channel_id']]['name']) + '">\n'
+                        starttime = datetime.fromtimestamp(epg_item['startts'], timezone.utc).strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.fromtimestamp(epg_item['endts'], timezone.utc).strftime('%Y%m%d%H%M%S')
+                        content = content + '    <programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + replace_by_html_entity(channels_list_by_id[epg_item['channel_id']]['name']) + '">\n'
                         content = content + '       <title lang="cs">' + replace_by_html_entity(str(epg_item['title'])) + '</title>\n'
                         if epg_item['description'] != None and len(epg_item['description']) > 0:
                             content = content + '       <desc lang="cs">' + replace_by_html_entity(epg_item['description']) + '</desc>\n'
@@ -165,7 +158,6 @@ def generate_epg(output_file = '', show_progress = True):
             if show_progress == True:
                 dialog.close()
             xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300315), xbmcgui.NOTIFICATION_ERROR, 5000)
-            sys.exit()
     else:
         xbmcgui.Dialog().notification('Antik TV', addon.getLocalizedString(300317), xbmcgui.NOTIFICATION_ERROR, 5000)
         sys.exit()

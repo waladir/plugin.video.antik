@@ -18,7 +18,6 @@ def list_live(label):
     kodi_version = get_kodi_version()
     addon = xbmcaddon.Addon()
     xbmcplugin.setPluginCategory(_handle, label)
-    xbmcplugin.setContent(_handle, 'twshows')
     channels = Channels()
     channels_list = channels.get_channels_list('channel_number')
     epg = get_live_epg()

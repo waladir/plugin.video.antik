@@ -34,7 +34,7 @@ def play_live(id):
     session = Session()
     api = API()
     channels = Channels()
-    channels_list = channels.get_channels_list('id')   
+    channels_list = channels.get_channels_list('id', visible_filter = False)
     post = {'channel' : id }
     response = api.call_api(api = 'channel/detail', data = post, method = 'post', cookies = session.get_cookies())
 
@@ -96,7 +96,7 @@ def play_archive(id, start, stop):
     session = Session()
     api = API()
     channels = Channels()
-    channels_list = channels.get_channels_list('id')   
+    channels_list = channels.get_channels_list('id', visible_filter = False)
     post = {'channelIdentifier' : id, 'showStart' : start, 'showStop' : stop}
     response = api.call_api(api = 'archive/verify', data = post, method = 'post', cookies = session.get_cookies())
     if 'showIdentifier' in response and len(response['showIdentifier']) > 0:

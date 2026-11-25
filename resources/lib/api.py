@@ -16,9 +16,9 @@ class API:
             xbmc.log('Antik TV > ' + str(url))
         try:
             if method == 'get':
-                response = requests.get(url = url, cookies = cookies, headers = self.headers)
+                response = requests.get(url = url, cookies = cookies, headers = self.headers, timeout = 30)
             elif method == 'post':
-                response = requests.post(url = url, json = data, cookies = cookies, headers = self.headers)
+                response = requests.post(url = url, json = data, cookies = cookies, headers = self.headers, timeout = 30)
             try:
                 data = response.json()
             except Exception as e:
@@ -28,6 +28,6 @@ class API:
                 xbmc.log('Antik TV > ' + str(data))
             return data
         except Exception as e:
-            xbmc.log('Antik TV > ' + addon.getLocalizedString(300204) + str(url) + ': ' + e.reason)
-            return { 'err' : e.reason }  
+            xbmc.log('Antik TV > ' + addon.getLocalizedString(300204) + str(url) + ': ' + str(e))
+            return { 'err' : str(e) }
 
